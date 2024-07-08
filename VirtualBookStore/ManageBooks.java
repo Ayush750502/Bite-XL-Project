@@ -1,5 +1,7 @@
+
+
 /**
- * Write a description of ManageBooks here.
+ * Class to add functions and manage books.
  * 
  * @author Ayush Goyal
  * @version 0.0.1 || 8/07/2024
