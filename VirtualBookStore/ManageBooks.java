@@ -1,4 +1,3 @@
-
 /**
  * Write a description of ManageBooks here.
  * 
@@ -51,6 +50,14 @@ public class ManageBooks {
      * adding new book to collection by taking details of the book like name , publication , genre ,category etc.
      */
     void addBook(){
+
+    }
+    /**
+     * saving the virtual copy of the book in file
+     * 
+     * @param bk
+     */
+    void saveBook(Book bk){
 
     }
 }
