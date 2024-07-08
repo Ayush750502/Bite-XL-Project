@@ -17,6 +17,12 @@ public class ManageUser {
      * To get user using emailId
      */
     void getUserByEmail(String emailId){
-        
+
+    }
+    /**
+     * To authenticate user
+     */
+    void userLogin(){
+
     }
 }
