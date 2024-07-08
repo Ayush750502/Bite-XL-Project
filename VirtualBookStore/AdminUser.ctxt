@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=AdminUser
+comment0.text=\r\n\ Class\ to\ store\ details\ of\ a\ Admin\ User.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=firstname\ lastname\ emailId\ password\ id
+comment1.target=AdminUser(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int)
+numComments=2
