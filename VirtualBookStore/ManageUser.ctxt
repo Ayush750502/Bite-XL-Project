@@ -1,4 +1,12 @@
 #BlueJ class context
 comment0.target=ManageUser
 comment0.text=\r\n\ Write\ a\ description\ of\ ManageUser\ here.\r\n\ \r\n\ @author\ Ayush\ Goyal\r\n\ @version\ 0.0.1\ ||\ 8/07/2024\r\n
-numComments=1
+comment1.params=
+comment1.target=void\ addEndUser()
+comment2.params=emailId
+comment2.target=void\ getUserByEmail(java.lang.String)
+comment2.text=\r\n\ To\ get\ user\ using\ emailId\r\n
+comment3.params=
+comment3.target=void\ userLogin()
+comment3.text=\r\n\ To\ authenticate\ user\r\n
+numComments=4
