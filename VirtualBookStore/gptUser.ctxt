@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=gptUser
+comment0.text=\r\n\ Write\ a\ description\ of\ gptUser\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name\ email\ password\ wallet
+comment1.target=gptUser(java.lang.String,\ java.lang.String,\ java.lang.String,\ double)
+comment2.params=csvLine
+comment2.target=gptUser\ fromCsvLine(java.lang.String)
+comment2.text=\r\n\ Method\ fromCsvLine\r\n\r\n\ @param\ csvLine\ A\ parameter\r\n\ @return\ The\ return\ value\r\n
+comment3.params=
+comment3.target=java.lang.String\ toCsvLine()
+numComments=4

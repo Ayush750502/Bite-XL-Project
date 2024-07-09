@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.target=Book
-comment0.text=\r\n\ Class\ to\ store\ meta\ data\ of\ a\ book\ to\ implement\ functions\ on\ books.\r\n\ \r\n\ @author\ Ayush\ Goyal\r\n\ @version\ 0.0.1\ ||\ 8/7/2024\r\n
-comment1.params=name\ authors\ publication\ genre\ id
-comment1.target=Book(java.lang.String,\ java.lang.String[],\ java.lang.String,\ java.lang.String[],\ int)
-numComments=2
