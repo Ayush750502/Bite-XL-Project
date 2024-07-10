@@ -1,7 +1,7 @@
 # Bite-XL-Project
 Creating a virtual book store using java 
 
-# Initial Options:-
+## Initial Options:-
 <ol>
     <li>
         <h3>Login using email</h3>

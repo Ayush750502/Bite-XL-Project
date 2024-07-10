@@ -27,24 +27,24 @@ public class BookFileManager {
         BookFileManager bkmg = new BookFileManager();
         boolean b = true;
         while (b) {
-            // bkmg.newBook();
-            // bkmg.showBooks(books);
-            // System.out.println("Enter the author name: ");
-            // String temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.fillerByAuthor(temp));
-            // System.out.println("Enter the publication name: ");
-            // temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.fillerByPublication(temp));
-            // System.out.println("Enter the book's name: ");
-            // temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.fillerByName(temp));
-            // System.out.println("Enter IDs: ");
-            // temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.fillerByIDs(temp.split(",")));
-            // bkmg.showBooks(books);
-            // System.out.println("Choose a book to open:");
-            // int idx = sc.nextInt() -1 ;
-            // books.get(idx).openBook();
+            bkmg.newBook();
+            bkmg.showBooks(books);
+            System.out.println("Enter the author name: ");
+            String temp = sc.nextLine();
+            bkmg.showBooks(bkmg.fillerByAuthor(temp));
+            System.out.println("Enter the publication name: ");
+            temp = sc.nextLine();
+            bkmg.showBooks(bkmg.fillerByPublication(temp));
+            System.out.println("Enter the book's name: ");
+            temp = sc.nextLine();
+            bkmg.showBooks(bkmg.fillerByName(temp));
+            System.out.println("Enter IDs: ");
+            temp = sc.nextLine();
+            bkmg.showBooks(bkmg.fillerByIDs(temp.split(",")));
+            bkmg.showBooks(books);
+            System.out.println("Choose a book to open:");
+            int idx = sc.nextInt() -1 ;
+            books.get(idx).openBook();
             b = false;
         }
         
