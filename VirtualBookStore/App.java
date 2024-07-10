@@ -14,25 +14,25 @@ public class App {
         
     }
     void userStory(){
-        System.out.println("a. Login");
-        System.out.println("b. Sign up");
-        char ch = sc.next().charAt(0);
-        boolean b = true;
-        while (b) {
+        char ch;
+        do{
+            System.out.println("a. Login");
+            System.out.println("b. Sign up");
+            System.out.println("0. Exit");
+            ch = sc.next().charAt(0);
             switch (ch) {
                 case 'a':
                     userLogin();
-                    b = false;
                     break;
                 case 'b':
                     createUser();
-                    b = false;
                     break;
                 default:
                     System.out.println("Invalide Input");
                     break;
             }
         }
+        while (ch != '0');
     }
     void userLogin(){
         System.out.print("Enter the email: ");

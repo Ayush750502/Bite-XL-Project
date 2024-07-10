@@ -79,6 +79,10 @@ public class User {
         }
         return true;
     }
+    public double addMoney(Double amt){
+        this.wallet += amt ;
+        return wallet;
+    }
     /**
      * To produce csv lines for user.
      * 
