@@ -37,7 +37,7 @@
 
 
 
-# <span class="heading1"> Initial Options:-</span>
+## <span class="heading1"> Initial Options:-</span>
 <ol>
     <li>
         <h3>Login using email</h3>
