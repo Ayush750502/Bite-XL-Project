@@ -73,14 +73,6 @@ public class User {
         this.wallet += amt ;
         return wallet;
     }
-    public void showUser(List<Book> books){
-        int i = 1;
-        System.out.println( "Users's name: "+name + ",\nUsers's email: " + email + ",\nUser's Book List:-");
-        for(Book book : books){
-            System.out.println(i+". "+book.name);
-        }
-        System.out.println(",Balence: " + wallet);
-    }
     /**
      * Converting csv line into User
      *
