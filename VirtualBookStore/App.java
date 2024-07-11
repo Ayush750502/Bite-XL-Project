@@ -13,6 +13,9 @@ public class App {
     Scanner sc = new Scanner(System.in);
     BookFileManager bookManager = new BookFileManager();
     UserFileManager userManager = new UserFileManager();
+    /**
+     * To run initial functions
+     */
     void open(){
         BookFileManager.loadBooks();
         userManager.loadUsers();
@@ -27,6 +30,11 @@ public class App {
                 return false;
         }
     }
+    /**
+     * To verify that the user has succesfully logged in or not
+     * 
+     * @return true when user logges in.
+     */
     boolean userLoginStory(){
         char ch;
         do{
@@ -48,6 +56,11 @@ public class App {
         }
         while (ch != '0');
     }
+    /**
+     * To authenticate user
+     * 
+     * @return true if user in true else false
+     */
     boolean userLogin(){
         System.out.println("\nEnter the email: ");
         String email = sc.next();
@@ -61,6 +74,9 @@ public class App {
         }
         return b;
     }
+    /**
+     * To create new user
+     */
     void createUser(){
         System.out.println("Enter your name: ");
         String name = sc.nextLine();
@@ -75,6 +91,9 @@ public class App {
             System.out.println("Failed to create user!\nPlease try again later!");
         }
     }
+    /**
+     * To give search options for books
+     */
     void searchBooks(){
         List<Integer> bks = new ArrayList<>();
         System.out.println("\nSearch options: ");
@@ -128,12 +147,23 @@ public class App {
         } while(true);
 
     }
+    /**
+     * To show books of the indexs in the list
+     * 
+     * @param bks
+     * @return The index of the book in the list which the user has choosen
+     */
     int bookOptions(List<Integer> bks){
         bookManager.showBooks(bks);
         System.out.println("\nEnter your choice: ");
         int ch = sc.nextInt();
         return bks.get(ch);
     }
+    /**
+     * To display and perform opreations over the user's list
+     * 
+     * @throws IOException
+     */
     void userBookList() throws IOException{
         List<Integer> bks = bookManager.filterByIDs(userManager.users.get(userManager.idx).books);
         int bk = bookOptions(bks);
@@ -159,6 +189,9 @@ public class App {
                 }
         } while(true);
     }
+    /**
+     * To show user's profile and perform updation over it
+     */
     void userProfile(){
         User ur = userManager.users.get(userManager.idx);
         do{
@@ -215,7 +248,7 @@ public class App {
             }
         } while(true);
     }
-    void mainMenu(){
+    void mainMenu() throws IOException{
         do{
             System.out.println("\nMain Menu:");
             System.out.println("0. To exit:- ");
@@ -229,14 +262,21 @@ public class App {
                     System.out.println("Good Bye!");
                     return;
                 case 'a':
-    
+                    searchBooks();
+                    break;
+                case 'b':
+                    userBookList();
+                    break;
+                case 'c':
+                    userProfile();
+                    break;
                 default:
                     break;
             }
         } while(true);
     } 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         App app = new App();
         app.open();
         if(app.userLoginStory()){
