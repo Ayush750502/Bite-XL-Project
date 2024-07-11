@@ -1,29 +1,5 @@
 
-<style>
-    .heading1{
-        color : white;
-        shape-margin: 1%;
-    }
-    table{
-        border-style: none;
-        margin: 5px;
-    }
-    table tr th{
-        color: yellow;
-    }
-    table tr td{
-        color: cyan;
-    }
-    .choice{
-        color: orange;
-    }
-    .io{
-        color: crimson;
-    }
-    h3{
-        color: greenyellow;
-    }
-</style>
+
 # <span class="heading1">Bite-XL-Project:</span>
 <table>
     <tbody><tr>
@@ -60,21 +36,7 @@
 
 
 
-<style>
-    .heading1{
-        color : white;
-        shape-margin: 1%;
-    }
-    .choice{
-        color: orange;
-    }
-    .io{
-        color: crimson;
-    }
-    h3{
-        color: greenyellow;
-    }
-</style>
+
 # <span class="heading1"> Initial Options:-</span>
 <ol>
     <li>
@@ -98,21 +60,7 @@
 
 
 
-<style>
-    .heading1{
-        color : white;
-        shape-margin: 1%;
-    }
-    .choice{
-        color: orange;
-    }
-    .io{
-        color: crimson;
-    }
-    h3{
-        color: greenyellow;
-    }
-</style>
+
 ## <span class="heading1">Main Options:-</span>
 <ol>
     <li>
