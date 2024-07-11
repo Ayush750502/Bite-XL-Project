@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class User {
     String name;
-    private String email;
+    String email;
     List<String> books;
     private String password;
     double wallet;
@@ -29,20 +29,7 @@ public class User {
         this.password = password;
         this.wallet = wallet;
     }
-    /**
-     * Method fromCsvLine
-     *
-     * @param csvLine a line from csv file
-     * @return user from the csv file
-     */
-    public static User fromCsvLine(String csvLine) {
-        String[] fields = csvLine.split(",");
-        List<String> books = new ArrayList<>();
-        for(String book : fields[2].split("<>")){
-            books.add(book);
-        }
-        return new User(fields[0], fields[1], books, fields[3], Double.parseDouble(fields[4]));
-    }
+    
     /**
      * To check password.
      * 
@@ -79,8 +66,29 @@ public class User {
         }
         return true;
     }
+    public void newPassword(String newPass){
+        this.password = newPass;
+    }
+    public double addMoney(Double amt){
+        this.wallet += amt ;
+        return wallet;
+    }
     /**
-     * To produce csv lines for user.
+     * Converting csv line into User
+     *
+     * @param csvLine a line from csv file
+     * @return user from the csv file
+     */
+    public static User fromCsvLine(String csvLine) {
+        String[] fields = csvLine.split(",");
+        List<String> books = new ArrayList<>();
+        for(String book : fields[2].split("<>")){
+            books.add(book);
+        }
+        return new User(fields[0], fields[1], books, fields[3], Double.parseDouble(fields[4]));
+    }
+    /**
+     * To produce csv lines from user.
      * 
      * @return comma seperated varables string
      */

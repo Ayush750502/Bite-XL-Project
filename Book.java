@@ -9,7 +9,7 @@ import java.awt.Desktop;
  */
 public class Book {
     
-    private String fileName;
+    String fileName;
     String name;
     String publication;
     String authors;

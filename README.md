@@ -1,18 +1,92 @@
-# Bite-XL-Project
-Creating a virtual book store using java 
 
-# Initial Options:-
+<style>
+    .heading1{
+        color : white;
+        shape-margin: 1%;
+    }
+    table{
+        border-style: none;
+        margin: 5px;
+    }
+    table tr th{
+        color: yellow;
+    }
+    table tr td{
+        color: cyan;
+    }
+    .choice{
+        color: orange;
+    }
+    .io{
+        color: crimson;
+    }
+    h3{
+        color: greenyellow;
+    }
+</style>
+# <span class="heading1">Bite-XL-Project:</span>
+<table>
+    <tbody><tr>
+        <th>PROJECT TITLE:</th>
+        <td>VirtualBookStore</td></tr>
+    <tr>
+        <th>PURPOSE OF PROJECT:</th>
+        <td> To develope a book store to manage user and books.</td></tr>
+    <tr>
+        <th>VERSION or DATE:</th>
+        <td> 0.0.1 || 10/7/2024</td></tr>
+    <tr>
+        <th>HOW TO START THIS PROJECT:</th>
+        <td>run app.java </td></tr>
+    <tr>
+        <th>AUTHORS:</th>
+        <td>
+            <ul>
+                <li>Ayush Goyal [21BTCSE0058]</li> 
+                <li>Gautam Pacholi [21BTCSE0122]</li> 
+                <li>Lalit Mohan Joshi [21BTCSE0294]</li>
+                <li>Sumit Kharkwal[21BTCSE0060]</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>USER INSTRUCTIONS:</th>
+        <td>Console - based Input/Output </td>
+    </tr>
+</tbody></table>
+<span style="color: cyan">
+</span>
+
+
+
+
+<style>
+    .heading1{
+        color : white;
+        shape-margin: 1%;
+    }
+    .choice{
+        color: orange;
+    }
+    .io{
+        color: crimson;
+    }
+    h3{
+        color: greenyellow;
+    }
+</style>
+# <span class="heading1"> Initial Options:-</span>
 <ol>
     <li>
         <h3>Login using email</h3>
-        <ul>
+        <ul class="io">
             <li>Enter your email ID : </li>
             <li>Enter your password : </li>
         </ul>
     </li>
     <li>
         <h3>Create an new account</h3>
-        <ul>
+        <ul class="io">
             <li>Enter your name : </li>
             <li>Enter your email ID : </li>
             <li>Enter password : </li>
@@ -20,28 +94,47 @@ Creating a virtual book store using java
     </li>
 </ol>
 
-## Main Options:-
+
+
+
+
+<style>
+    .heading1{
+        color : white;
+        shape-margin: 1%;
+    }
+    .choice{
+        color: orange;
+    }
+    .io{
+        color: crimson;
+    }
+    h3{
+        color: greenyellow;
+    }
+</style>
+## <span class="heading1">Main Options:-</span>
 <ol>
     <li>
         <h3>Search Books:</h3>
         <ol>
             <li>
-                <h4>By name : </h4>
-                <ul>
+                <h4 class="choice">By name : </h4>
+                <ul class="io">
                     <li>Enter the name or enter '0' to back: </li>
-                        <ol>
+                        <ol class="choice">
                             <li>Options for book:-</li>
                         </ol>
-                        <ul>
+                        <ul class="io">
                             <li>Enter your choice or enter '0' to back:-</li>
                         </ul>
                 </ul>
             </li>
             <li>
-                <h4>By author : </h4>
-                <ul>
+                <h4 class="choice">By author : </h4>
+                <ul class="io">
                     <li>Enter the author or enter '0' to back: </li>
-                        <ol>
+                        <ol class="choice">
                             <li>Options for book:-</li>
                         </ol>
                         <ul>
@@ -50,10 +143,10 @@ Creating a virtual book store using java
                 </ul>
             </li>
             <li>
-                <h4>By publication : </h4>
-                <ul>
+                <h4 class="choice">By publication : </h4>
+                <ul class="io">
                     <li>Enter the publication or enter '0' to back: </li>
-                        <ol>
+                        <ol class="choice">
                             <li>Options for book:-</li>
                         </ol>
                         <ul>
@@ -62,10 +155,10 @@ Creating a virtual book store using java
                 </ul>
             </li>
             <li>
-                <h4>By genre : </h4>
-                <ul>
+                <h4 class="choice">By genre : </h4>
+                <ul class="io">
                     <li>Enter the genre or enter '0' to back: </li>
-                        <ol>
+                        <ol class="choice">
                             <li>Options for book:-</li>
                         </ol>
                         <ul>
@@ -77,21 +170,22 @@ Creating a virtual book store using java
     </li>
     <li>
         <h3>View Read List:-</h3>
-            <ol>
-                <li>Options for book : </li>
+            <ol class="choice">
+                <li>Open Book : </li>
             </ol>
-            <ul>
+            <ul class="io">
                 <li>Enter your choice or enter '0' to back:-</li>
             </ul>
     </li>
     <li>
         <h3>View Your Profile:-</h3>
-            <ul>
+            <ul class="io">
                 <li>User credentials : </li>
             </ul>
-            <ol>
+            <ol class="choice">
                 <li>Want to update it: </li>
                 <li>return to the main menu: </li>
             </ol>
     </li>
 </ol>
+
