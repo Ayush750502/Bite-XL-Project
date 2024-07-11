@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Write a description of User here.
  * 
- * @author Copilot
+ * @author Ayush Goyal
  * @version 0.0.1 || 9/07/2024
  */
 public class UserFileManager {
@@ -32,48 +32,48 @@ public class UserFileManager {
         UserFileManager mg = new UserFileManager();
         boolean b = true;
         while(b){
-            // System.out.println("Enter your name : ");
-            // String name = sc.nextLine();
-            // System.out.println("Enter your email: ");
-            // String email = sc.nextLine();
-            // System.out.println("Enter password: ");
-            // String password = sc.nextLine();
-            // b = mg.newUser(name , email, password);
-            // if(b){
-                // System.out.println("Registration completed!");
-            // } else {
-                // b = true;
-                // continue;
-            // }
-            // while (b) {
-                // System.out.println("Enter email:");
-                // email = sc.nextLine();
-                // System.out.println("Enter password:");
-                // password = sc.nextLine();
-                // b = mg.login(email, password);
-                // if(b){
-                    // System.out.println("Login successfull!");
-                // } else {
-                    // System.out.println("Login un-successfull!");
-                    // b = true;
-                    // continue;
-                // }
-                // System.out.println("Enter the file name!");
-                // String[] fnm = sc.nextLine().split(",");
-                // for(String f : fnm){
-                    // mg.addBookToList(f);
-                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
-                // }
-                // for(String f : fnm){
-                    // mg.removeBookFromList(f);
-                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
-                // }
-                // while (b) {
-                    // System.out.println("Enter email:");
-                    // email = sc.nextLine();
-                    // b = !mg.remove(email);
-                // }
-            // }
+            System.out.println("Enter your name : ");
+            String name = sc.nextLine();
+            System.out.println("Enter your email: ");
+            String email = sc.nextLine();
+            System.out.println("Enter password: ");
+            String password = sc.nextLine();
+            b = mg.newUser(name , email, password);
+            if(b){
+                System.out.println("Registration completed!");
+            } else {
+                b = true;
+                continue;
+            }
+            while (b) {
+                System.out.println("Enter email:");
+                email = sc.nextLine();
+                System.out.println("Enter password:");
+                password = sc.nextLine();
+                b = mg.login(email, password);
+                if(b){
+                    System.out.println("Login successfull!");
+                } else {
+                    System.out.println("Login un-successfull!");
+                    b = true;
+                    continue;
+                }
+                System.out.println("Enter the file name!");
+                String[] fnm = sc.nextLine().split(",");
+                for(String f : fnm){
+                    mg.addBookToList(f);
+                    System.out.println(mg.users.get(mg.idx).toCsvLine());
+                }
+                for(String f : fnm){
+                    mg.removeBookFromList(f);
+                    System.out.println(mg.users.get(mg.idx).toCsvLine());
+                }
+                while (b) {
+                    System.out.println("Enter email:");
+                    email = sc.nextLine();
+                    b = !mg.remove(email);
+                }
+            }
             b = false;
         }
     }
@@ -101,6 +101,26 @@ public class UserFileManager {
             }
             i++;
         }
+    }
+
+    /**
+     * Adding money to the wallet
+     * 
+     * @param amt
+     */
+    public void addMoney(double amt){
+        if(idx > -1){
+            users.get(idx).addMoney(amt);
+            saveUsers(users);
+        } else
+            System.out.println("User has not logged in yet");
+    }
+    public void deductMoney(double amt){
+        if (users.get(idx).checkWallet(amt)) {
+            users.get(idx).wallet -= amt;
+            saveUsers(users);
+        } else 
+            System.out.println("Amount is not suffiecent!");
     }
     /**
      * To save list of users to csv file.

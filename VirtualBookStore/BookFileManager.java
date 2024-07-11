@@ -26,27 +26,29 @@ public class BookFileManager {
     public static void main(String[] args) throws IOException {
         BookFileManager bkmg = new BookFileManager();
         boolean b = true;
-        // while (b) {
-        //     bkmg.newBook();
-        //     bkmg.showBooks(books);
-        //     System.out.println("Enter the author name: ");
-        //     String temp = sc.nextLine();
-        //     bkmg.showBooks(bkmg.fillerByAuthor(temp));
-        //     System.out.println("Enter the publication name: ");
-        //     temp = sc.nextLine();
-        //     bkmg.showBooks(bkmg.fillerByPublication(temp));
-        //     System.out.println("Enter the book's name: ");
-        //     temp = sc.nextLine();
-        //     bkmg.showBooks(bkmg.fillerByName(temp));
-        //     System.out.println("Enter IDs: ");
-        //     temp = sc.nextLine();
-        //     bkmg.showBooks(bkmg.fillerByIDs(temp.split(",")));
-        //     bkmg.showBooks(books);
-        //     System.out.println("Choose a book to open:");
-        //     int idx = sc.nextInt() -1 ;
-        //     books.get(idx).openBook();
-        //     b = false;
-        // }
+        while (b) {
+            bkmg.newBook();
+            System.out.println("Enter the author name: ");
+            String temp = sc.nextLine();
+            bkmg.showBooks(bkmg.filterByAuthor(temp));
+            System.out.println("Enter the publication name: ");
+            temp = sc.nextLine();
+            bkmg.showBooks(bkmg.filterByPublication(temp));
+            System.out.println("Enter the book's name: ");
+            temp = sc.nextLine();
+            bkmg.showBooks(bkmg.filterByName(temp));
+            System.out.println("Enter IDs: ");
+            temp = sc.nextLine();
+            List<String> temps = new ArrayList<>();
+            for(String t : temp.split(","))
+                temps.add(t);
+            bkmg.showBooks(bkmg.filterByIDs(temps));
+            bkmg.showAllBooks();
+            System.out.println("Choose a book to open:");
+            int idx = sc.nextInt() -1 ;
+            books.get(idx).openBook();
+            b = false;
+        }
         
     }
     /**
@@ -96,7 +98,26 @@ public class BookFileManager {
      * 
      * @param books
      */
-    public void showBooks(List <Book> books){
+    public void showBooks(List <Integer> indexes){
+        
+        for(int i = 0; i < indexes.size() ; i++){
+            Book book = books.get(indexes.get(i));
+            System.out.println("\n-------------------------------------------------------------------------------------");
+            System.out.println((i++)+".) Name of the book: " + book.name );
+            System.out.println("Publication house: " + book.publication );
+            System.out.print("Authors: " );
+            for(String author : book.authors.split("<>")){
+                System.out.print(author+",");
+            }
+            System.out.print("\nPrice: ");
+            if(book.price == 0){
+                System.out.println("free");
+            } else 
+                System.out.println(book.price);
+            System.out.println("-------------------------------------------------------------------------------------");
+        }
+    }
+    public void showAllBooks(){
         int i = 1;
         for(Book book : books){
             System.out.println("\n-------------------------------------------------------------------------------------");
@@ -150,12 +171,14 @@ public class BookFileManager {
      * @param name
      * @return Filtered list of books
      */
-    public List<Book> fillerByName(String name){
-        List<Book> filteredList = new ArrayList<>();
+    public List<Integer> filterByName(String name){
+        List<Integer> filteredList = new ArrayList<>();
+        int i = 0;
         for(Book book : books){
             if(book.checkName(name)){
-                filteredList.add(book);
+                filteredList.add(i);
             }
+            i++;
         }
         return filteredList;
     }
@@ -165,12 +188,14 @@ public class BookFileManager {
      * @param author
      * @return Filtered list of books
      */
-    public List<Book> fillerByAuthor(String author){
-        List<Book> filteredList = new ArrayList<>();
+    public List<Integer> filterByAuthor(String author){
+        List<Integer> filteredList = new ArrayList<>();
+        int i = 0;
         for(Book book : books){
             if(book.checkAuthor(author)){
-                filteredList.add(book);
+                filteredList.add(i);
             }
+            i++;
         }
         return filteredList;
     }
@@ -180,12 +205,14 @@ public class BookFileManager {
      * @param genre
      * @return Filtered list of books
      */
-    public List<Book> fillerByGenre(String genre){
-        List<Book> filteredList = new ArrayList<>();
+    public List<Integer> filterByGenre(String genre){
+        List<Integer> filteredList = new ArrayList<>();
+        int i = 0;
         for(Book book : books){
             if(book.checkName(genre)){
-                filteredList.add(book);
+                filteredList.add(i);
             }
+            i++;
         }
         return filteredList;
     }
@@ -195,12 +222,14 @@ public class BookFileManager {
      * @param publication
      * @return Filtered list of books
      */
-    public List<Book> fillerByPublication(String publication){
-        List<Book> filteredList = new ArrayList<>();
+    public List<Integer> filterByPublication(String publication){
+        List<Integer> filteredList = new ArrayList<>();
+        int i = 0;
         for(Book book : books){
             if(book.checkPublication(publication)){
-                filteredList.add(book);
+                filteredList.add(i);
             }
+            i++;
         }
         return filteredList;
     }
@@ -210,13 +239,15 @@ public class BookFileManager {
      * @param ID
      * @return List of books
      */
-    public List<Book> fillerByIDs(String[] ID){
-        List<Book> filteredList = new ArrayList<>();
+    public List<Integer> filterByIDs(List<String> ID){
+        List<Integer> filteredList = new ArrayList<>();
+        int i = 0;
         for(String id : ID){
             for(Book book: books){
                 if(book.checkFile(id)){
-                    filteredList.add(book);
+                    filteredList.add(i);
                 }
+                i++;
             }
         }
         return filteredList;
