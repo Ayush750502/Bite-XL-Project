@@ -10,7 +10,7 @@ import java.util.*;
 public class BookFileManager {
     private static final String BOOKS_FILE = "books.csv";
     static Scanner sc = new Scanner(System.in);
-    static List<Book> books;
+    List<Book> books;
     /**
      * To load books to the list.
      */
@@ -46,7 +46,7 @@ public class BookFileManager {
             bkmg.showAllBooks();
             System.out.println("Choose a book to open:");
             int idx = sc.nextInt() -1 ;
-            books.get(idx).openBook();
+            bkmg.books.get(idx).openBook();
             b = false;
         }
         
@@ -103,7 +103,7 @@ public class BookFileManager {
         for(int i = 0; i < indexes.size() ; i++){
             Book book = books.get(indexes.get(i));
             System.out.println("\n-------------------------------------------------------------------------------------");
-            System.out.println((i++)+".) Name of the book: " + book.name );
+            System.out.println((i+1)+".) Name of the book: " + book.name );
             System.out.println("Publication house: " + book.publication );
             System.out.print("Authors: " );
             for(String author : book.authors.split("<>")){
@@ -139,7 +139,7 @@ public class BookFileManager {
      * Saves list of books to the csv file
      * 
      */
-    public static void saveBooks() {
+    public void saveBooks() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(BOOKS_FILE))) {
             for (Book book : books) {
                 writer.println(book.toCsvLine());
@@ -242,13 +242,13 @@ public class BookFileManager {
     public List<Integer> filterByIDs(List<String> ID){
         List<Integer> filteredList = new ArrayList<>();
         int i = 0;
-        for(String id : ID){
-            for(Book book: books){
+        for( Book book: books){
+            for(String id : ID){
                 if(book.checkFile(id)){
                     filteredList.add(i);
                 }
-                i++;
             }
+            i++;
         }
         return filteredList;
     }
