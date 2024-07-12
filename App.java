@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class App {
     Scanner sc = new Scanner(System.in);
-    static BookFileManager bookManager = new BookFileManager();
-    static UserFileManager userManager = new UserFileManager();
+    BookFileManager bookManager = new BookFileManager();
+    UserFileManager userManager = new UserFileManager();
     /**
      * To run initial functions
      */
@@ -48,13 +48,10 @@ public class App {
                 case 'b':
                     createUser();
                     break;
-                default:
-                    System.out.println("Invalide Input");
-                    break;
             }
-            return false;
         }
         while (ch != '0');
+        return false;
     }
     /**
      * To authenticate user
@@ -78,15 +75,16 @@ public class App {
      * To create new user
      */
     void createUser(){
-        System.out.println("Enter your name: ");
-        String name = sc.nextLine();
-        System.out.println("Enter your email: ");
+        System.out.print("\nEnter your firstname: ");
+        String fn = sc.next();
+        System.out.print("\nEnter your lastname: ");
+        String ln = sc.next();
+        System.out.print("\nEnter your email: ");
         String email = sc.next();
-        System.out.println("Enter new password");
+        System.out.print("\nEnter new password: ");
         String password = sc.next();
-        if(userManager.newUser(name, email, password)){
+        if(userManager.newUser((fn+" "+ln), email, password)){
             System.out.println("New user is created!");
-            userLogin();
         } else {
             System.out.println("Failed to create user!\nPlease try again later!");
         }
@@ -102,23 +100,23 @@ public class App {
         System.out.println("b. by author:- ");
         System.out.println("c. by publication:- ");
         System.out.println("Make your choice: ");
-        char ch = sc.nextLine().charAt(0);
+        char ch = sc.next().charAt(0);
         switch (ch) {
             case '0':
                 return;
             case 'a':
-                System.out.println("Enter the name of the book: ");
-                String name = sc.nextLine();
+                System.out.print("\nEnter the name of the book: ");
+                String name = sc.next();
                 bks = bookManager.filterByName(name);
                 break;
             case 'b':
-                System.out.println("Enter the name of the author: ");
-                String author = sc.nextLine();
+                System.out.print("\nEnter the name of the author: ");
+                String author = sc.next();
                 bks = bookManager.filterByAuthor(author);
                 break;
             case 'c':
-                System.out.println("Enter the name of the publication: ");
-                String publication = sc.nextLine();
+                System.out.print("\nEnter the name of the publication: ");
+                String publication = sc.next();
                 bks = bookManager.filterByPublication(publication);
                 break;
             default:
@@ -126,6 +124,9 @@ public class App {
                 break;
             }
         int bk = bookOptions(bks);
+        if(bk == -1){
+            return;
+        }
         do{
             System.out.println("0. Back to main menu:");
             System.out.println("a. Buy:");
@@ -134,8 +135,9 @@ public class App {
                 case '0':
                     return;
                 case 'a':
-                    if(userManager.users.get(userManager.idx).checkWallet(BookFileManager.books.get(bk).price)){
-                        userManager.addBookToList(BookFileManager.books.get(bk).fileName);
+                double price = bookManager.books.get(bk).price;
+                    if(userManager.users.get(userManager.idx).checkWallet(price)){
+                        userManager.addBookToList(bookManager.books.get(bk).fileName , price);
                         System.out.println("Book added successfully!\n");
                     } else 
                         System.out.println("You don't have suffecient amount in your wallet!\n");
@@ -157,7 +159,10 @@ public class App {
         bookManager.showBooks(bks);
         System.out.println("\nEnter your choice: ");
         int ch = sc.nextInt();
-        return bks.get(ch);
+        if(ch <= 0){
+            return -1;
+        }
+        return bks.get(ch-1);
     }
     /**
      * To display and perform opreations over the user's list
@@ -166,8 +171,14 @@ public class App {
      */
     void userBookList() throws IOException{
         List<Integer> bks = bookManager.filterByIDs(userManager.users.get(userManager.idx).books);
+        if(bks.size() == 0){
+            System.out.println("Their is not book saved in your list.");
+            return;
+        }
         int bk = bookOptions(bks);
-        Book book = BookFileManager.books.get(bks.get(bk));
+        if(bk == -1)
+            return;
+        Book book = bookManager.books.get(bk);
         do{
 
             System.out.println("\n0. Back to Main Menu:");
@@ -196,7 +207,7 @@ public class App {
         User ur = userManager.users.get(userManager.idx);
         do{
 
-            System.out.println("Name: "+ur.name);
+            System.out.println("\nName: "+ur.name);
             System.out.println("Email: "+ur.email);
             System.out.println("Wallet Balance: "+ur.wallet);
             System.out.println("\n\n0. Back To main Menu:");
@@ -209,25 +220,25 @@ public class App {
                 case '0':
                     return;
                 case 'a':
-                    System.out.println("Enter new name:");
-                    String newName = sc.nextLine();
+                    System.out.print("Enter new name:");
+                    String newName = sc.next();
                     if(lastValidation()){
                         userManager.users.get(userManager.idx).name = newName;
                     }
                     return;
                 case 'b':
-                    System.out.println("Enter new email ID:");
-                    String newEmail = sc.nextLine();
+                    System.out.print("Enter new email ID:");
+                    String newEmail = sc.next();
                     if(lastValidation()){
                         userManager.users.get(userManager.idx).name = newEmail;
                     }
                     return;
                 case 'c':
-                    System.out.println("Enter old password: ");
-                    String xxx = sc.nextLine();
+                    System.out.print("Enter old password: ");
+                    String xxx = sc.next();
                     if(ur.validatePassword(xxx)){
-                        System.out.println("Enter new password:");
-                        String newPassword = sc.nextLine();
+                        System.out.print("\nEnter new password:");
+                        String newPassword = sc.next();
                         if(lastValidation()){
                             userManager.users.get(userManager.idx).newPassword(newPassword);
                         }
@@ -248,11 +259,6 @@ public class App {
             }
         } while(true);
     }
-    /**
-     * To show main menu to the users.
-     * 
-     * @throws IOException
-     */
     void mainMenu() throws IOException{
         do{
             System.out.println("\nMain Menu:");
@@ -280,18 +286,13 @@ public class App {
             }
         } while(true);
     } 
-    /**
-     * To start app
-     * 
-     * @throws IOException
-     */
-    public static void main() throws IOException {
+
+    public static void main(String[] args) throws IOException {
         App app = new App();
         app.open();
         if(app.userLoginStory()){
             app.mainMenu();
         }
-        bookManager.saveBooks();
-        userManager.saveUsers(userManager.users);
+        app.bookManager.saveBooks();
     }
 }

@@ -58,16 +58,16 @@ public class UserFileManager {
                     b = true;
                     continue;
                 }
-                System.out.println("Enter the file name!");
-                String[] fnm = sc.nextLine().split(",");
-                for(String f : fnm){
-                    mg.addBookToList(f);
-                    System.out.println(mg.users.get(mg.idx).toCsvLine());
-                }
-                for(String f : fnm){
-                    mg.removeBookFromList(f);
-                    System.out.println(mg.users.get(mg.idx).toCsvLine());
-                }
+                // System.out.println("Enter the file name!");
+                // String[] fnm = sc.nextLine().split(",");
+                // for(String f : fnm){
+                    // mg.addBookToList(f);
+                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
+                // }
+                // for(String f : fnm){
+                    // mg.removeBookFromList(f);
+                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
+                // }
                 while (b) {
                     System.out.println("Enter email:");
                     email = sc.nextLine();
@@ -82,8 +82,9 @@ public class UserFileManager {
      * 
      * @param ID
      */
-    public void addBookToList(String ID){
+    public void addBookToList(String ID , Double amount){
         users.get(idx).books.add(ID);
+        users.get(idx).wallet -= amount;
         saveUsers(users);
 
     }
