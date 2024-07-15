@@ -71,11 +71,15 @@ public class UserFileManager {
                 while (b) {
                     System.out.println("Enter email:");
                     email = sc.nextLine();
-                    b = !mg.remove(email);
+                    b = !mg.removeUser(email);
                 }
             }
             b = false;
         }
+    }
+
+    public void logout(){
+        idx = -1;
     }
     /**
      * To add books to the user's list
@@ -175,7 +179,7 @@ public class UserFileManager {
      * @param email
      * @return false if user not found else true if users is removed
      */
-    public boolean remove(String email){
+    public boolean removeUser(String email){
         System.out.print("\t\tEnter password : ");
         if(users.get(this.idx).validatePassword(sc.nextLine()) != true){
             System.out.println("\n\t\tPlease try again with correct password");
@@ -214,5 +218,19 @@ public class UserFileManager {
         return true;
     }
     
+
+    /*
+     * function to show all users
+     */
+    protected void showAllUsers(){
+        int i = 1;
+        for(User book : this.users){
+            System.out.println("\n-------------------------------------------------------------------------------------");
+            System.out.println((i++)+".) Name of the user: " + book.name );
+            System.out.print("\nEmail: ");
+            System.out.println(book.email);
+            System.out.println("-------------------------------------------------------------------------------------");
+        }
+    }
 }
 
