@@ -358,6 +358,8 @@ public class App {
             System.out.println("b. Remove a book:- ");
             System.out.println("c. Remove a user:- ");
             System.out.println("d. View your profile:- ");
+            System.out.println("e. Show all books available");
+            System.out.println("f. Show all users available");
             System.out.println("z. To logout:- ");
             System.out.println("Make your choice: ");
             ch = sc.next().charAt(0);
@@ -376,6 +378,12 @@ public class App {
                     break;
                 case 'd':
                     adminProfile();
+                    break;
+                case 'e':
+                    bookManager.showAllBooks();
+                    break;
+                case 'f':
+                    userManager.showAllUsers();
                     break;
                 case 'z':
                     adminManager.logout();
