@@ -10,16 +10,29 @@ import java.util.List;
  * @version 0.0.1 || 9/07/2024
  */
 public class App {
-    Scanner sc = new Scanner(System.in);
-    BookFileManager bookManager = new BookFileManager();
-    UserFileManager userManager = new UserFileManager();
+    Scanner sc;
+    BookFileManager bookManager;
+    UserFileManager userManager;
+    AdminManager adminManager;
+    private boolean isAdmin;
+    private boolean isLoggedin, exit;
+    public App(){
+        exit = false;
+        sc = new Scanner(System.in);
+        bookManager = new BookFileManager();
+        userManager = new UserFileManager();
+        adminManager = new AdminManager();
+        isAdmin = false;
+        isLoggedin = false;
+    }
     /**
      * To run initial functions
-     */
-    void open(){
-        BookFileManager.loadBooks();
-        userManager.loadUsers();
-    }
+    //  */
+    // void open(){
+    //     BookFileManager.loadBooks();
+    //     // userManager.loadUsers();
+    //     // adminManager.init();
+    // }
     boolean lastValidation(){
         System.out.println("Are you sure? (y/n)");
         char ch = sc.next().charAt(0);
@@ -32,26 +45,54 @@ public class App {
     }
     /**
      * To verify that the user has succesfully logged in or not
-     * 
+     *  also to check if person logged int is user or admin
      * @return true when user logges in.
      */
     boolean userLoginStory(){
         char ch;
         do{
             System.out.println("a. Login");
-            System.out.println("b. Sign up");
+            System.out.println("b. Sign up\nc. Admin login");
             System.out.println("0. Exit");
             ch = sc.next().charAt(0);
             switch (ch) {
+                case '0':
+                    exit = true;
+                    break;
                 case 'a':
-                return userLogin();
+                    userManager.loadUsers();
+                    return userLogin();
                 case 'b':
+                    userManager.loadUsers();
                     createUser();
                     break;
+                case 'c':
+                    adminManager.init();
+                    if(adminLogin()){
+                        isAdmin = true;
+                        return true;
+                    }
+                    return false;
+                default :
+                    System.out.println("Invalid inputs!");
             }
+            clearScreen();
         }
         while (ch != '0');
         return false;
+    }
+    private boolean adminLogin() {
+        System.out.println("\nEnter the email: ");
+        String email = sc.next();
+        System.out.println("Enter the password: ");
+        String password = sc.next();
+        boolean b = adminManager.login(email, password);
+        if(b){
+            System.out.println("\nLogin successfull");
+        } else {
+            System.out.println("\nEither your email or your password is wrong!");
+        }
+        return b;
     }
     /**
      * To authenticate user
@@ -216,58 +257,75 @@ public class App {
             System.out.println("c. Update password:");
             System.out.println("d. Add money:");
             char ch = sc.next().charAt(0);
-            switch (ch) {
-                case '0':
-                    return;
-                case 'a':
-                    System.out.print("Enter new name:");
-                    String newName = sc.next();
-                    if(lastValidation()){
-                        userManager.users.get(userManager.idx).name = newName;
-                    }
-                    return;
-                case 'b':
-                    System.out.print("Enter new email ID:");
-                    String newEmail = sc.next();
-                    if(lastValidation()){
-                        userManager.users.get(userManager.idx).name = newEmail;
-                    }
-                    return;
-                case 'c':
-                    System.out.print("Enter old password: ");
-                    String xxx = sc.next();
-                    if(ur.validatePassword(xxx)){
-                        System.out.print("\nEnter new password:");
-                        String newPassword = sc.next();
+            try{
+                switch (ch) {
+                    case '0':
+                        return;
+                    case 'a':
+                        System.out.print("Enter new name:");
+                        String newName = sc.next();
                         if(lastValidation()){
-                            userManager.users.get(userManager.idx).newPassword(newPassword);
+                            userManager.users.get(userManager.idx).name = newName;
                         }
-                    } else 
-                        System.out.println("Password is wrong!");
-                    return;
-                case 'd':
-                    System.out.println("Enter the amount to add in your wallet:");
-                    Double n = sc.nextDouble();
-                    if(n > 0){
-                        userManager.users.get(userManager.idx).addMoney(n);
-                    } else 
-                        System.out.println("Invalid amount");
-                    return;
-                default:
-                    System.out.println("Invalid Choice!\n");
-                    break;
+                        return;
+                    case 'b':
+                        System.out.print("Enter new email ID:");
+                        String newEmail = sc.next();
+                        if(lastValidation()){
+                            userManager.users.get(userManager.idx).name = newEmail;
+                        }
+                        return;
+                    case 'c':
+                        System.out.print("Enter old password: ");
+                        String xxx = sc.next();
+                        if(ur.validatePassword(xxx)){
+                            System.out.print("\nEnter new password:");
+                            String newPassword = sc.next();
+                            if(lastValidation()){
+                                userManager.users.get(userManager.idx).newPassword(newPassword);
+                            }
+                        } else 
+                            System.out.println("Password is wrong!");
+                        return;
+                    case 'd':
+                        System.out.println("Enter the amount to add in your wallet:");
+                        Double n = sc.nextDouble();
+                        if(n > 0){
+                            userManager.users.get(userManager.idx).addMoney(n);
+                        } else 
+                            System.out.println("Invalid amount");
+                        return;
+                    default:
+                        System.out.println("Invalid Choice!\n");
+                        break;
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
             }
         } while(true);
+    }   
+
+    void adminProfile(){
+        Admins admin = adminManager.currAdmin;
+        System.out.println("\nName: "+admin.name);
+        System.out.println("Email: "+admin.email);
+        System.out.println("\n\n 1. Update password\nEnter anything to go back To main Menu");
+        if(sc.next().equals("1")){
+            adminManager.updatePassword();
+        }
     }
-    void mainMenu() throws IOException{
+
+    void userMenu() throws IOException{
+        char ch;
         do{
             System.out.println("\nMain Menu:");
             System.out.println("0. To exit:- ");
             System.out.println("a. Search Book:- ");
             System.out.println("b. View your book list:- ");
             System.out.println("c. View your profile:- ");
+            System.out.println("z. To logout:- ");
             System.out.println("Make your choice: ");
-            char ch = sc.next().charAt(0);
+            ch = sc.next().charAt(0);
             switch (ch) {
                 case '0':
                     System.out.println("Good Bye!");
@@ -281,18 +339,85 @@ public class App {
                 case 'c':
                     userProfile();
                     break;
+                case 'z':
+                    userManager.logout();
+                    isLoggedin = false;
+                    return;
                 default:
                     break;
             }
-        } while(true);
+        } while(ch != '0');
+    } 
+
+    void adminMenu() throws IOException{
+        char ch;
+        do{
+            System.out.println("\nMain Menu:");
+            System.out.println("0. To exit:- ");
+            System.out.println("a. Add a book:- ");
+            System.out.println("b. Remove a book:- ");
+            System.out.println("c. Remove a user:- ");
+            System.out.println("d. View your profile:- ");
+            System.out.println("e. Show all books available");
+            System.out.println("f. Show all users available");
+            System.out.println("z. To logout:- ");
+            System.out.println("Make your choice: ");
+            ch = sc.next().charAt(0);
+            switch (ch) {
+                case '0':
+                    System.out.println("Good Bye!");
+                    return;
+                case 'a':
+                    adminManager.addBook(bookManager);
+                    break;
+                case 'b':
+                    adminManager.removeBook(bookManager);
+                    break;
+                case 'c':
+                    adminManager.removeUser(userManager);
+                    break;
+                case 'd':
+                    adminProfile();
+                    break;
+                case 'e':
+                    bookManager.showAllBooks();
+                    break;
+                case 'f':
+                    userManager.showAllUsers();
+                    break;
+                case 'z':
+                    adminManager.logout();
+                    isAdmin = false;
+                    isLoggedin = false;
+                    return;
+                default:
+                    break;
+            }
+        } while(ch != '0');
     } 
 
     public static void main(String[] args) throws IOException {
         App app = new App();
-        app.open();
-        if(app.userLoginStory()){
-            app.mainMenu();
-        }
+        // app.open();
+        do{
+            if(app.userLoginStory()){
+                app.isLoggedin = true;
+                if(!app.isAdmin)
+                    app.userMenu();
+                else
+                    app.adminMenu();
+            }
+            clearScreen();
+        }while(!app.isLoggedin && !app.exit);
         app.bookManager.saveBooks();
+        System.out.println("Happy coding!");
+    }
+
+    private static void clearScreen() {
+        // ANSI escape code to clear the screen
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
+
+

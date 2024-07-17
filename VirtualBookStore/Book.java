@@ -125,4 +125,18 @@ public class Book {
         // (String fileName, String name, String publication, String authors, String genre , Double price)
         return fileName + "," + name+","+ publication+","+ authors+","+genre+","+ price;
     }
+
+    @Override 
+    public String toString(){
+        StringBuilder res = new StringBuilder("{ Name: "+name+", Publication: "+publication+", Authors: [");
+        for (String s : authors.split("<>")) {
+            res.append(s+", ");
+        }
+        res.append("], Genre: [");
+        for (String s : genre.split("<>")) {
+            res.append(s+", ");
+        }
+        res.append("], Price: "+price);
+        return res.toString();
+    }
 }

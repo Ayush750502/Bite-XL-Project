@@ -27,22 +27,22 @@ public class BookFileManager {
         BookFileManager bkmg = new BookFileManager();
         boolean b = true;
         while (b) {
-            bkmg.newBook();
-            System.out.println("Enter the author name: ");
-            String temp = sc.nextLine();
-            bkmg.showBooks(bkmg.filterByAuthor(temp));
-            System.out.println("Enter the publication name: ");
-            temp = sc.nextLine();
-            bkmg.showBooks(bkmg.filterByPublication(temp));
-            System.out.println("Enter the book's name: ");
-            temp = sc.nextLine();
-            bkmg.showBooks(bkmg.filterByName(temp));
-            System.out.println("Enter IDs: ");
-            temp = sc.nextLine();
-            List<String> temps = new ArrayList<>();
-            for(String t : temp.split(","))
-                temps.add(t);
-            bkmg.showBooks(bkmg.filterByIDs(temps));
+            // bkmg.newBook();
+            // System.out.println("Enter the author name: ");
+            // String temp = sc.nextLine();
+            // bkmg.showBooks(bkmg.filterByAuthor(temp));
+            // System.out.println("Enter the publication name: ");
+            // temp = sc.nextLine();
+            // bkmg.showBooks(bkmg.filterByPublication(temp));
+            // System.out.println("Enter the book's name: ");
+            // temp = sc.nextLine();
+            // bkmg.showBooks(bkmg.filterByName(temp));
+            // System.out.println("Enter IDs: ");
+            // temp = sc.nextLine();
+            // List<String> temps = new ArrayList<>();
+            // for(String t : temp.split(","))
+            //     temps.add(t);
+            // bkmg.showBooks(bkmg.filterByIDs(temps));
             bkmg.showAllBooks();
             System.out.println("Choose a book to open:");
             int idx = sc.nextInt() -1 ;
@@ -57,10 +57,14 @@ public class BookFileManager {
      * @return 
      */
     public boolean newBook(){
-        System.out.println("Enter the name of the file: ");
+        System.out.println("Enter the path of the file: ");
         String fileName = sc.nextLine();
         System.out.println("Enter the name of the book: ");
         String name = sc.nextLine();
+        if(searchByName(name) != null){
+            System.out.println("Book with name "+name+ " already exists.");
+            return false;
+        }
         System.out.println("Enter the name of the book's publication: ");
         String publication = sc.nextLine();
         System.out.println("Enter the names of the book's authors seperated by commas: ");
@@ -91,6 +95,7 @@ public class BookFileManager {
         }
         books.add(new Book(fileName, name, publication, authors, genres , price));
         saveBooks();
+        System.out.println("Book added to catalogue");
         return true;
     }
     /**
@@ -107,7 +112,7 @@ public class BookFileManager {
             System.out.println("Publication house: " + book.publication );
             System.out.print("Authors: " );
             for(String author : book.authors.split("<>")){
-                System.out.print(author+",");
+                System.out.print(author+", ");
             }
             System.out.print("\nPrice: ");
             if(book.price == 0){
@@ -125,7 +130,7 @@ public class BookFileManager {
             System.out.println("Publication house: " + book.publication );
             System.out.print("Authors: " );
             for(String author : book.authors.split("<>")){
-                System.out.print(author+",");
+                System.out.print(author+", ");
             }
             System.out.print("\nPrice: ");
             if(book.price == 0){
@@ -251,6 +256,28 @@ public class BookFileManager {
             i++;
         }
         return filteredList;
+    }
+
+    public void removeBook(){
+        this.showAllBooks();
+        System.out.print("enter the name of the book to remove: ");
+        String bookName = sc.nextLine();
+        Book book  = searchByName(bookName);
+        if(book == null){
+            System.out.println("No book with name "+bookName+" exists.");
+            return;
+        }
+        books.remove(book);
+        saveBooks();
+        System.out.println("Book successfully removed");
+    }
+    private Book searchByName(String bookName) {
+        for(Book book : books){
+            if(bookName.equals(book.name)){
+                return book;
+            }
+        }
+        return null;
     }
 }
 
