@@ -1,6 +1,12 @@
-
+import javax.swing.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 /**
  * Class to maitain functions for managing the books
  * 
@@ -51,14 +57,60 @@ public class BookFileManager {
         }
         
     }
+    private String selectAndCopyPDFFile() {
+        // Ask the user if they want to select a PDF file
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to select a PDF file?", "Select File", JOptionPane.YES_NO_OPTION);
+
+        if (response == JOptionPane.YES_OPTION) {
+            // Open file chooser dialog
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Select a PDF file");
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Files", "pdf"));
+
+            int userSelection = fileChooser.showOpenDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                
+                // Define the destination folder
+                String destinationFolder = "./Books"; // Replace with your destination folder path
+                File destinationDir = new File(destinationFolder);
+                
+                // Create destination folder if it doesn't exist
+                if (!destinationDir.exists()) {
+                    destinationDir.mkdirs();
+                }
+                String fileName = selectedFile.getName();
+                fileName = fileName.substring(0 , selectedFile.getName().indexOf(".pdf"));
+                System.out.println(fileName+"\n");
+                // Define the destination file path
+                File destinationFile = new File(destinationDir, selectedFile.getName());
+                
+                try {
+                    // Copy the file to the destination folder
+                    Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    JOptionPane.showMessageDialog(null, "File copied successfully to " + destinationFile.getAbsolutePath());
+                    return fileName;
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "An error occurred while copying the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                    return "";
+                }
+            }
+            return "";
+        }
+        return "";
+    }
     /**
      * To add new book in the list
      * 
      * @return 
      */
     public boolean newBook(){
-        System.out.println("Enter the path of the file: ");
-        String fileName = sc.nextLine();
+        String fileName = selectAndCopyPDFFile();
+        if(fileName.length()<=0){
+            return false;
+        }
         System.out.println("Enter the name of the book: ");
         String name = sc.nextLine();
         if(searchByName(name) != null){
