@@ -68,7 +68,7 @@ public class Book {
      * @return boolean
      */
     public boolean checkName(String name){
-        if(this.name.equals(name))
+        if(this.name.indexOf(name) != -1)
             return true;
         return false;
     } 
