@@ -122,7 +122,6 @@ Creating a virtual book store using java
                 <ul class="io">
                     <li>Enter the publication or enter '0' to back: </li>
                         <ol class="choice">
-
                             <li>Options for book:-</li>
                         </ol>
                         <ul>
@@ -131,17 +130,14 @@ Creating a virtual book store using java
                 </ul>
             </li>
             <li>
-
                 <h4>By genre : </h4>
                 <ul>
                     <li>Enter the genre or enter '0' to back: </li>
                         <ol>
-
                 <h4 class="choice">By genre : </h4>
                 <ul class="io">
                     <li>Enter the genre or enter '0' to back: </li>
                         <ol class="choice">
-
                             <li>Options for book:-</li>
                         </ol>
                         <ul>
@@ -153,33 +149,27 @@ Creating a virtual book store using java
     </li>
     <li>
         <h3>View Read List:-</h3>
-
             <ol>
                 <li>Options for book : </li>
             </ol>
             <ul>
-
             <ol class="choice">
                 <li>Open Book : </li>
             </ol>
             <ul class="io">
-
                 <li>Enter your choice or enter '0' to back:-</li>
             </ul>
     </li>
     <li>
         <h3>View Your Profile:-</h3>
-
             <ul>
                 <li>User credentials : </li>
             </ul>
             <ol>
-
             <ul class="io">
                 <li>User credentials : </li>
             </ul>
             <ol class="choice">
-
                 <li>Want to update it: </li>
                 <li>return to the main menu: </li>
             </ol>
