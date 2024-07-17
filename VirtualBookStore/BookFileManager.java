@@ -29,74 +29,45 @@ public class BookFileManager {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-        BookFileManager bkmg = new BookFileManager();
-        boolean b = true;
-        while (b) {
-            // bkmg.newBook();
-            // System.out.println("Enter the author name: ");
-            // String temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.filterByAuthor(temp));
-            // System.out.println("Enter the publication name: ");
-            // temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.filterByPublication(temp));
-            // System.out.println("Enter the book's name: ");
-            // temp = sc.nextLine();
-            // bkmg.showBooks(bkmg.filterByName(temp));
-            // System.out.println("Enter IDs: ");
-            // temp = sc.nextLine();
-            // List<String> temps = new ArrayList<>();
-            // for(String t : temp.split(","))
-            //     temps.add(t);
-            // bkmg.showBooks(bkmg.filterByIDs(temps));
-            bkmg.showAllBooks();
-            System.out.println("Choose a book to open:");
-            int idx = sc.nextInt() -1 ;
-            bkmg.books.get(idx).openBook();
-            b = false;
-        }
-        
+        System.out.println("this is bookfile class");
     }
-    private String selectAndCopyPDFFile() {
-        // Ask the user if they want to select a PDF file
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to select a PDF file?", "Select File", JOptionPane.YES_NO_OPTION);
-
-        if (response == JOptionPane.YES_OPTION) {
-            // Open file chooser dialog
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Select a PDF file");
-            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Files", "pdf"));
-
-            int userSelection = fileChooser.showOpenDialog(null);
-
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                
-                // Define the destination folder
-                String destinationFolder = "./Books"; // Replace with your destination folder path
-                File destinationDir = new File(destinationFolder);
-                
-                // Create destination folder if it doesn't exist
-                if (!destinationDir.exists()) {
-                    destinationDir.mkdirs();
-                }
-                String fileName = selectedFile.getName();
-                fileName = fileName.substring(0 , selectedFile.getName().indexOf(".pdf"));
-                System.out.println(fileName+"\n");
-                // Define the destination file path
-                File destinationFile = new File(destinationDir, selectedFile.getName());
-                
-                try {
-                    // Copy the file to the destination folder
-                    Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    JOptionPane.showMessageDialog(null, "File copied successfully to " + destinationFile.getAbsolutePath());
-                    return fileName;
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "An error occurred while copying the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    e.printStackTrace();
-                    return "";
-                }
+    /*
+     * function that imports book's pdf to books folder
+     */
+    private String importPDF() {
+        // Open file chooser dialog
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select a PDF file");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Files", "pdf"));
+        System.out.println("Choose the file path");
+        int userSelection = fileChooser.showOpenDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            
+            // Define the destination folder
+            String destinationFolder = "./Books"; // Replace with your destination folder path
+            File destinationDir = new File(destinationFolder);
+            
+            // Create destination folder if it doesn't exist
+            if (!destinationDir.exists()) {
+                destinationDir.mkdirs();
             }
-            return "";
+            String fileName = selectedFile.getName();
+            fileName = fileName.substring(0 , selectedFile.getName().indexOf(".pdf"));
+            System.out.println("selected file: "+fileName+"\n");
+            // Define the destination file path
+            File destinationFile = new File(destinationDir, selectedFile.getName());
+            
+            try {
+                // Copy the file to the destination folder
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(null, "File copied successfully to " + destinationFile.getAbsolutePath());
+                return fileName;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "An error occurred while copying the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return "";
+            }
         }
         return "";
     }
@@ -106,8 +77,12 @@ public class BookFileManager {
      * @return 
      */
     public boolean newBook(){
-        String fileName = selectAndCopyPDFFile();
+        System.out.println("Loading......!");
+        String fileName = importPDF();
         if(fileName.length()<=0){
+            UtilityFuntions.clearScreen();
+            fileName = "";
+            System.out.println("no file recieved ");
             return false;
         }
         System.out.println("Enter the name of the book: ");

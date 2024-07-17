@@ -1,6 +1,7 @@
 0000,Book A,Publisher X,Author1 <> Author2,testing,0.0
 0001,EMMA,Planet eBook,Jane Austen,testing,1.0
 bjvbdj,sample,demo,self,testing<>debugging,150.0
-demofile,demo,demo,auth,comedy<>adventure<>educational,0.0
 0001,best-book-ever,lalit publications,lalit<>champs,study<>knowledge,100.0
 User,User documentation,JavaDoc,Ayush Goyal,mannual,0.0
+QB sorted,the question bank,lalit,lalit,questionBank,100.0
+AI Unit 1,Ai unit,gpt4,gpt4,AI,150.0

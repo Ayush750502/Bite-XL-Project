@@ -76,7 +76,7 @@ public class App {
                 default :
                     System.out.println("Invalid inputs!");
             }
-            clearScreen();
+            UtilityFuntions.clearScreen();
         }
         while (ch != '0');
         return false;
@@ -88,8 +88,10 @@ public class App {
         String password = sc.next();
         boolean b = adminManager.login(email, password);
         if(b){
+            UtilityFuntions.clearScreen();
             System.out.println("\nLogin successfull");
         } else {
+            UtilityFuntions.clearScreen();
             System.out.println("\nEither your email or your password is wrong!");
         }
         return b;
@@ -106,8 +108,10 @@ public class App {
         String password = sc.next();
         boolean b = userManager.login(email, password);
         if(b){
+            UtilityFuntions.clearScreen();
             System.out.println("\nLogin successfull");
         } else {
+            UtilityFuntions.clearScreen();
             System.out.println("\nEither your email or your password is wrong!");
         }
         return b;
@@ -198,7 +202,9 @@ public class App {
      */
     int bookOptions(List<Integer> bks){
         bookManager.showBooks(bks);
-        System.out.println("\nEnter your choice: ");
+        System.out.println("\nEnter your choice: \n0. To go back");
+        
+        sc.nextLine();
         int ch = sc.nextInt();
         if(ch <= 0){
             return -1;
@@ -212,7 +218,7 @@ public class App {
      */
     void userBookList() throws IOException{
         List<Integer> bks = bookManager.filterByIDs(userManager.users.get(userManager.idx).books);
-        if(bks.size() == 0){
+        if(bks.isEmpty()){
             System.out.println("Their is not book saved in your list.");
             return;
         }
@@ -341,6 +347,7 @@ public class App {
                     break;
                 case 'z':
                     userManager.logout();
+                    UtilityFuntions.clearScreen();
                     isLoggedin = false;
                     return;
                 default:
@@ -387,6 +394,7 @@ public class App {
                     break;
                 case 'z':
                     adminManager.logout();
+                    UtilityFuntions.clearScreen();
                     isAdmin = false;
                     isLoggedin = false;
                     return;
@@ -407,17 +415,11 @@ public class App {
                 else
                     app.adminMenu();
             }
-            clearScreen();
         }while(!app.isLoggedin && !app.exit);
         app.bookManager.saveBooks();
         System.out.println("Happy coding!");
     }
 
-    private static void clearScreen() {
-        // ANSI escape code to clear the screen
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 }
 
 
