@@ -77,7 +77,9 @@ public class UserFileManager {
             b = false;
         }
     }
-
+    /**
+     * To loge out the user making index value -(i.e user is not logged in)
+     */
     public void logout(){
         idx = -1;
     }
@@ -120,6 +122,11 @@ public class UserFileManager {
         } else
             System.out.println("User has not logged in yet");
     }
+    /**
+     * To decuct money form the user's wallet when ever he/she purchases a book.
+     * 
+     * @param amt
+     */
     public void deductMoney(double amt){
         if (users.get(idx).checkWallet(amt)) {
             users.get(idx).wallet -= amt;
@@ -141,6 +148,11 @@ public class UserFileManager {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
+    /**
+     * To load users from the csv file to the List
+     * 
+     * @return users' list
+     */
     public List<User> loadUsers() {
         List<User> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
@@ -219,7 +231,7 @@ public class UserFileManager {
     }
     
 
-    /*
+    /**
      * function to show all users
      */
     protected void showAllUsers(){

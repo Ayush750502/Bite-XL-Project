@@ -16,6 +16,9 @@ public class App {
     AdminManager adminManager;
     private boolean isAdmin;
     private boolean isLoggedin, exit;
+    /**
+     * To initialise application
+     */
     public App(){
         exit = false;
         sc = new Scanner(System.in);
@@ -33,6 +36,10 @@ public class App {
     //     // userManager.loadUsers();
     //     // adminManager.init();
     // }
+    /**
+     * final validation function
+     * @return true if user is sure
+     */
     boolean lastValidation(){
         System.out.println("Are you sure? (y/n)");
         char ch = sc.next().charAt(0);
@@ -44,8 +51,8 @@ public class App {
         }
     }
     /**
-     * To verify that the user has succesfully logged in or not
-     *  also to check if person logged int is user or admin
+     * To verify that the user has succesfully logged in or not 
+also to check if person logged int is user or admin
      * @return true when user logges in.
      */
     boolean userLoginStory(){
@@ -81,6 +88,11 @@ public class App {
         while (ch != '0');
         return false;
     }
+    /**
+     * To authenticate admin .
+     * 
+     * @return true if authentication is successfull
+     */
     private boolean adminLogin() {
         System.out.println("\nEnter the email: ");
         String email = sc.next();
@@ -304,7 +316,9 @@ public class App {
             }
         } while(true);
     }   
-
+    /**
+     * To display admin's profile.
+     */
     void adminProfile(){
         Admins admin = adminManager.currAdmin;
         System.out.println("\nName: "+admin.name);
@@ -314,7 +328,11 @@ public class App {
             adminManager.updatePassword();
         }
     }
-
+    /**
+     * To display main menu option to the end user.
+     * 
+     * @throws IOException
+     */
     void userMenu() throws IOException{
         char ch;
         do{
@@ -348,7 +366,10 @@ public class App {
             }
         } while(ch != '0');
     } 
-
+    /**
+     * To display main menu options to the admin.
+     * @throws IOException
+     */
     void adminMenu() throws IOException{
         char ch;
         do{
@@ -395,7 +416,12 @@ public class App {
             }
         } while(ch != '0');
     } 
-
+    /**
+     * To make app run.
+     * 
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         App app = new App();
         // app.open();
@@ -412,7 +438,9 @@ public class App {
         app.bookManager.saveBooks();
         System.out.println("Happy coding!");
     }
-
+    /**
+     * Function to clear terminal.
+     */
     private static void clearScreen() {
         // ANSI escape code to clear the screen
         System.out.print("\033[H\033[2J");

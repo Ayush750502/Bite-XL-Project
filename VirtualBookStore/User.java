@@ -55,7 +55,7 @@ public class User {
         return false;
     }
     /**
-     * checks for the amount in the wallet to be suffcient
+     * Checks for the amount in the wallet to be suffcient
      * 
      * @param amt 
      * @return true if the amount is less or equal to that of the wallet else false
@@ -66,9 +66,20 @@ public class User {
         }
         return true;
     }
+    /**
+     * To change password of the user
+     * 
+     * @param newPass
+     */
     public void newPassword(String newPass){
         this.password = newPass;
     }
+    /**
+     * To add money to the user's account
+     * 
+     * @param amt
+     * @return
+     */
     public double addMoney(Double amt){
         this.wallet += amt ;
         return wallet;

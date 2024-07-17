@@ -56,6 +56,11 @@ public class BookFileManager {
         }
         
     }
+    /**
+     * To take file from the system and save it to the app's books location
+     * 
+     * @return file name
+     */
     private String selectAndCopyPDFFile() {
         // Ask the user if they want to select a PDF file
         int response = JOptionPane.showConfirmDialog(null, "Do you want to select a PDF file?", "Select File", JOptionPane.YES_NO_OPTION);
@@ -103,7 +108,7 @@ public class BookFileManager {
     /**
      * To add new book in the list
      * 
-     * @return 
+     * @return true if book is saved properly
      */
     public boolean newBook(){
         String fileName = selectAndCopyPDFFile();
@@ -173,6 +178,9 @@ public class BookFileManager {
             System.out.println("-------------------------------------------------------------------------------------");
         }
     }
+    /**
+     * TO display all books
+     */
     public void showAllBooks(){
         int i = 1;
         for(Book book : books){
@@ -308,7 +316,9 @@ public class BookFileManager {
         }
         return filteredList;
     }
-
+    /**
+     * To remove book from the book list
+     */
     public void removeBook(){
         this.showAllBooks();
         System.out.print("enter the name of the book to remove: ");
@@ -322,6 +332,12 @@ public class BookFileManager {
         saveBooks();
         System.out.println("Book successfully removed");
     }
+    /**
+     * To search book by name
+     * 
+     * @param bookName
+     * @return Book with the name "Bookname"
+     */
     private Book searchByName(String bookName) {
         for(Book book : books){
             if(bookName.equals(book.name)){

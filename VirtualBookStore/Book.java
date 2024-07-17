@@ -52,6 +52,12 @@ public class Book {
             Double.parseDouble(fields[5])
         );
     }
+    /**
+     * To check whether the name of the file matches or not
+     * 
+     * @param fileName
+     * @return true if the names are same.
+     */
     public boolean checkFile(String fileName){
         return this.fileName.equals(fileName);
     }
@@ -125,7 +131,12 @@ public class Book {
         // (String fileName, String name, String publication, String authors, String genre , Double price)
         return fileName + "," + name+","+ publication+","+ authors+","+genre+","+ price;
     }
-
+    
+    /**
+     * To convert book's details to a single string.
+     * 
+     * @return string line
+     */
     @Override 
     public String toString(){
         StringBuilder res = new StringBuilder("{ Name: "+name+", Publication: "+publication+", Authors: [");
