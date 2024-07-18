@@ -28,7 +28,7 @@ public class BookFileManager {
      * @param args
      * @throws IOException 
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         System.out.println("this is bookfile class");
     }
     /*
@@ -61,7 +61,7 @@ public class BookFileManager {
             try {
                 // Copy the file to the destination folder
                 Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                JOptionPane.showMessageDialog(null, "File copied successfully to " + destinationFile.getAbsolutePath());
+                JOptionPane.showMessageDialog(null, "File successfully imported!");
                 return fileName;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "An error occurred while copying the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -77,6 +77,8 @@ public class BookFileManager {
      * @return 
      */
     public boolean newBook(){
+        System.out.println("Enter any key and hit enter to start adding book");
+        sc.nextLine();
         System.out.println("Loading......!");
         String fileName = importPDF();
         if(fileName.length()<=0){
@@ -98,26 +100,26 @@ public class BookFileManager {
         System.out.println("Enter the names of the book's genre seperated by commas: ");
         String [] genre = sc.nextLine().split(",");
         System.out.print("Enter the price of the book: ");
-        Double price = sc.nextDouble();
+        Double price = Double.valueOf(sc.next());
         String authors = "";
         boolean b = true;
         for(String temp : author){
             if (b) {
-                authors += temp;
+                authors += temp.trim();
                 b = false; 
             }
             else
-                authors += "<>"+temp;
+                authors += "<>"+temp.trim();
         }
         String genres = "";
         b = true;
         for(String temp : genre){
             if (b) {
-                genres += temp;
+                genres += temp.trim();
                 b = false; 
             }
             else
-                genres += "<>"+temp;
+                genres += "<>"+temp.trim();
         }
         books.add(new Book(fileName, name, publication, authors, genres , price));
         saveBooks();
@@ -299,7 +301,7 @@ public class BookFileManager {
     }
     private Book searchByName(String bookName) {
         for(Book book : books){
-            if(bookName.equals(book.name)){
+            if(bookName.equalsIgnoreCase(book.name)){
                 return book;
             }
         }

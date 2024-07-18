@@ -121,11 +121,11 @@ public class App {
      */
     void createUser(){
         System.out.print("\nEnter your firstname: ");
-        String fn = sc.next();
+        String fn = sc.next().trim();
         System.out.print("\nEnter your lastname: ");
-        String ln = sc.next();
+        String ln = sc.next().trim();
         System.out.print("\nEnter your email: ");
-        String email = sc.next();
+        String email = sc.next().trim();
         System.out.print("\nEnter new password: ");
         String password = sc.next();
         if(userManager.newUser((fn+" "+ln), email, password)){

@@ -29,53 +29,54 @@ public class UserFileManager {
      * @param args
      */
     public static void main(String[] args) {
-        UserFileManager mg = new UserFileManager();
-        boolean b = true;
-        while(b){
-            System.out.println("Enter your name : ");
-            String name = sc.nextLine();
-            System.out.println("Enter your email: ");
-            String email = sc.nextLine();
-            System.out.println("Enter password: ");
-            String password = sc.nextLine();
-            b = mg.newUser(name , email, password);
-            if(b){
-                System.out.println("Registration completed!");
-            } else {
-                b = true;
-                continue;
-            }
-            while (b) {
-                System.out.println("Enter email:");
-                email = sc.nextLine();
-                System.out.println("Enter password:");
-                password = sc.nextLine();
-                b = mg.login(email, password);
-                if(b){
-                    System.out.println("Login successfull!");
-                } else {
-                    System.out.println("Login un-successfull!");
-                    b = true;
-                    continue;
-                }
-                // System.out.println("Enter the file name!");
-                // String[] fnm = sc.nextLine().split(",");
-                // for(String f : fnm){
-                    // mg.addBookToList(f);
-                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
-                // }
-                // for(String f : fnm){
-                    // mg.removeBookFromList(f);
-                    // System.out.println(mg.users.get(mg.idx).toCsvLine());
-                // }
-                while (b) {
-                    System.out.println("Enter email:");
-                    email = sc.nextLine();
-                    b = !mg.removeUser(email);
-                }
-            }
-            b = false;
-        }
+        System.out.println("This is UserManagerFile");
+    //     UserFileManager mg = new UserFileManager();
+    //     boolean b = true;
+    //     while(b){
+    //         System.out.println("Enter your name : ");
+    //         String name = sc.nextLine();
+    //         System.out.println("Enter your email: ");
+    //         String email = sc.nextLine();
+    //         System.out.println("Enter password: ");
+    //         String password = sc.nextLine();
+    //         b = mg.newUser(name , email, password);
+    //         if(b){
+    //             System.out.println("Registration completed!");
+    //         } else {
+    //             b = true;
+    //             continue;
+    //         }
+    //         while (b) {
+    //             System.out.println("Enter email:");
+    //             email = sc.nextLine();
+    //             System.out.println("Enter password:");
+    //             password = sc.nextLine();
+    //             b = mg.login(email, password);
+    //             if(b){
+    //                 System.out.println("Login successfull!");
+    //             } else {
+    //                 System.out.println("Login un-successfull!");
+    //                 b = true;
+    //                 continue;
+    //             }
+    //             // System.out.println("Enter the file name!");
+    //             // String[] fnm = sc.nextLine().split(",");
+    //             // for(String f : fnm){
+    //                 // mg.addBookToList(f);
+    //                 // System.out.println(mg.users.get(mg.idx).toCsvLine());
+    //             // }
+    //             // for(String f : fnm){
+    //                 // mg.removeBookFromList(f);
+    //                 // System.out.println(mg.users.get(mg.idx).toCsvLine());
+    //             // }
+    //             while (b) {
+    //                 System.out.println("Enter email:");
+    //                 email = sc.nextLine();
+    //                 b = !mg.removeUser(email);
+    //             }
+    //         }
+    //         b = false;
+    //     }
     }
 
     public void logout(){

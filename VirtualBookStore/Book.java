@@ -62,7 +62,7 @@ public class Book {
      * @return boolean
      */
     public boolean checkName(String name){
-        if(this.name.equals(name))
+        if(this.name.equalsIgnoreCase(name))
             return true;
         return false;
     } 
@@ -73,8 +73,9 @@ public class Book {
      * @return boolean
      */
     public boolean checkAuthor(String author){
-        if(this.authors.indexOf(author) >=0)
-            return true;
+        for (String i : this.authors.split("<>")) 
+            if(i.equalsIgnoreCase(author))
+                return true;
         return false;
     } 
     /**
@@ -84,8 +85,9 @@ public class Book {
      * @return boolean
      */
     public boolean checkGenre(String genre){
-        if(this.genre.indexOf(genre) >=0)
-            return true;
+        for (String i : this.genre.split("<>")) 
+            if(i.equalsIgnoreCase(genre))
+                return true;
         return false;
     } 
     /**

@@ -49,7 +49,7 @@ public class User {
      * @return true if the email is matched else false
      */
     public boolean validateEmail(String email){
-        if(this.email.equals(email)){
+        if(this.email.equalsIgnoreCase(email)){
             return true;
         }
         return false;
