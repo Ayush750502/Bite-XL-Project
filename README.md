@@ -175,3 +175,4 @@ Creating a virtual book store using java
             </ol>
     </li>
 </ol>
+<img src="./Documentation/bookstore.png" />
