@@ -81,6 +81,11 @@ public class App {
         while (ch != '0');
         return false;
     }
+    /**
+     * To run admin login console.
+     * 
+     * @return true if the admin is valide
+     */
     private boolean adminLogin() {
         System.out.println("\nEnter the email: ");
         String email = sc.next();
@@ -144,6 +149,7 @@ public class App {
         System.out.println("a. by name:- ");
         System.out.println("b. by author:- ");
         System.out.println("c. by publication:- ");
+        System.out.println("d. by genre:- ");
         System.out.println("Make your choice: ");
         char ch = sc.next().charAt(0);
         switch (ch) {
@@ -163,6 +169,11 @@ public class App {
                 System.out.print("\nEnter the name of the publication: ");
                 String publication = sc.next();
                 bks = bookManager.filterByPublication(publication);
+                break;
+            case 'd':
+                System.out.print("\nEnter the genre: ");
+                String genre = sc.next();
+                bks = bookManager.filterByGenre(genre);
                 break;
             default:
                 System.out.println("Invalid option:-");
@@ -310,7 +321,9 @@ public class App {
             }
         } while(true);
     }   
-
+    /**
+     * To show admin profile
+     */
     void adminProfile(){
         Admins admin = adminManager.currAdmin;
         System.out.println("\nName: "+admin.name);
@@ -320,7 +333,11 @@ public class App {
             adminManager.updatePassword();
         }
     }
-
+    /**
+     * To show user menu options
+     * 
+     * @throws IOException
+     */
     void userMenu() throws IOException{
         char ch;
         do{
@@ -355,7 +372,10 @@ public class App {
             }
         } while(ch != '0');
     } 
-
+    /**
+     * To show admin menu options
+     * @throws IOException
+     */
     void adminMenu() throws IOException{
         char ch;
         do{
@@ -403,7 +423,11 @@ public class App {
             }
         } while(ch != '0');
     } 
-
+    /**
+     * To run app through main function.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         App app = new App();
         // app.open();

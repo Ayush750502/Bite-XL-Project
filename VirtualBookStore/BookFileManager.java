@@ -242,7 +242,7 @@ public class BookFileManager {
         List<Integer> filteredList = new ArrayList<>();
         int i = 0;
         for(Book book : books){
-            if(book.checkName(genre)){
+            if(book.checkGenre(genre)){
                 filteredList.add(i);
             }
             i++;

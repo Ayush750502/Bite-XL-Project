@@ -86,7 +86,7 @@ public class Book {
      */
     public boolean checkGenre(String genre){
         for (String i : this.genre.split("<>")) 
-            if(i.equalsIgnoreCase(genre))
+            if(i.indexOf(genre) != -1)
                 return true;
         return false;
     } 
