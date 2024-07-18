@@ -74,7 +74,7 @@ public class Book {
      */
     public boolean checkAuthor(String author){
         for (String i : this.authors.split("<>")) 
-            if(i.equalsIgnoreCase(author))
+            if(i.indexOf(author) == -1)
                 return true;
         return false;
     } 
