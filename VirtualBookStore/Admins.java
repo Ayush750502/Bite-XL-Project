@@ -20,8 +20,8 @@ public class Admins {
     }
 
     public boolean validateEmail(String email){
-        System.out.println(this.email);
-        return this.email.equals(email);
+        // System.out.println(this.email);
+        return this.email.equalsIgnoreCase(email);
     }
 
     public boolean validatePassword(String password){
